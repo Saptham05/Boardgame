@@ -24,12 +24,9 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-
+    
     - name: Trivy FS scan
       run: |
-        curl -sfL https://github.com/aquasecurity/trivy/releases/download/v0.35.0/trivy_0.35.0_Linux-x86_64.tar.gz -o trivy.tar.gz
-        tar zxvf trivy.tar.gz
-        sudo mv trivy /usr/local/bin/  
         trivy fs --format table -o fs.html .
 
     - name: SonarQube Scan
